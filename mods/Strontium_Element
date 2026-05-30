@@ -1,0 +1,48 @@
+runAfterLoad(function() {
+    // 固态 锶（灰黄色）
+    elements.sr = {
+        name: "锶",
+        color: "#B8B088",
+        behavior: behaviors.SOLID,
+        category: "solids",
+        density: 2.6,
+        temp: 25,
+        description: "金属锶，高温会熔化，燃烧发出亮红色火焰"
+    };
+
+    // 锶遇火生成锶焰
+    reactions.sr = [
+        {
+            elem: "fire",
+            result: "sr_fire",
+            chance: 0.3
+        }
+    ];
+
+    // 锶焰
+    elements.sr_fire = {
+        name: "锶焰",
+        color: "#FF3333",
+        behavior: behaviors.FIRE,
+        category: "energy",
+        temp: 1000,
+        description: "锶燃烧形成的红色火焰"
+    };
+
+    // 液态 熔融锶
+    elements.liquid_sr = {
+        name: "熔融锶",
+        color: "#C9C196", // 偏亮嘅灰黄液态色
+        behavior: behaviors.LIQUID,
+        category: "liquids",
+        density: 2.7,
+        temp: 777, // 锶熔点
+        viscosity: 0.2,
+        description: "高温熔化后的液态锶"
+    };
+
+    // 温度触发：高温固态锶 → 液态锶
+    melting.sr = "liquid_sr";
+    // 低温液态锶 → 固态锶
+    freezing.liquid_sr = "sr";
+});
